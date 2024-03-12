@@ -3,17 +3,18 @@ import { User } from '@prisma/client';
 import { UserService } from './user.service';
 
 
-@Controller("api/user")
+@Controller("auth")
 export class UserController {
 
     constructor(private readonly userService: UserService) { }
 
-    @Get("/:username")//
-    getUserByUsername(@Param('username') username: string) {
-        return this.userService.getUserByUsername(username);
+    @Get("/login/:username/:password")//
+    getUserByUsername(@Param('username') username: string,
+        @Param('password') password: string) {
+        return this.userService.getUserByUsername(username, password);
     }
 
-    @Post("/")
+    @Post("/register")
     createUser(@Body() user: User) {
         return this.userService.createUser(user);
     }

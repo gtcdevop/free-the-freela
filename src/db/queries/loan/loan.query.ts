@@ -19,6 +19,15 @@ export async function fetchPostById(id: string): Promise<Loan | null> {
         }
     })
 
-
     return loan
+}
+
+export async function createLoan(loan: Loan): Promise<Loan> {
+    loan.createdAt = new Date();
+    loan.updatedAt = new Date();
+    return await db.loan.create({
+        data: {
+            ...loan,
+        }
+    })
 }

@@ -21,6 +21,8 @@ model User {
   id            String   @id @default(cuid())
   username      String   @db.VarChar(255)       // will generate VARCHAR
   password      String   @db.VarChar(255)       // will generate VARCHAR
+  isAdmin       Boolean  @default(false)
+  isApplicant   Boolean  @default(false)
 }
 
 

@@ -4,17 +4,22 @@ import { v4 as uuidv4 } from 'uuid';
 const prisma = new PrismaClient();
 
 // Fetch user authentication data by email
-export const getUserByUsername = async (username: string) => {
+export const getUserByUsername = async (username: string, password: string) => {
     const user = await prisma.user.findFirst({
         where: {
             username: {
                 equals: username,
             },
+            password: {
+                equals: password
+            }
         },
         select: {
             id: true,
             username: true,
             password: true,
+            isAdmin: true,
+            isApplicant: true,
         },
     });
 
@@ -27,6 +32,7 @@ export const createUser = async (user: User) => {
             id: uuidv4(),
             username: user.username,
             password: user.password,
+            isApplicant: true
         },
     });
 
