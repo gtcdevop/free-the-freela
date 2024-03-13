@@ -1,15 +1,20 @@
 import { Injectable } from "@nestjs/common";
+import { createLoan, fetchLoanById, fetchLoans } from "src/db/queries/loan/loan.query";
 
 @Injectable()
 export class LoanService {
 
     constructor() { }
 
-    getLoanById(id: number) {
-        return `This action returns a #${id} loan`;
+    getLoanById(id: string) {
+        return fetchLoanById(id)
+    }
+
+    getLoans() {
+        return fetchLoans();
     }
 
     createLoan(data: any) {
-        return `This action creates a new loan`;
+        return createLoan(data)
     }
 }
